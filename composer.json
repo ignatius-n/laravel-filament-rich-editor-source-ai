@@ -1,0 +1,79 @@
+{
+    "name": "naturalgroove/laravel-filament-rich-editor-source-ai",
+    "description": "Source functionality for Filament 4.x Rich Editor with AI support",
+    "keywords": [
+        "naturalgroove",
+        "laravel",
+        "filament plugin",
+        "filament rich editor",
+        "rich editor source",
+        "ai powered rich editor"
+    ],
+    "homepage": "https://github.com/naturalgroove/filament-rich-editor-source-ai",
+    "support": {
+        "issues": "https://github.com/naturalgroove/filament-rich-editor-source-ai/issues",
+        "source": "https://github.com/naturalgroove/filament-rich-editor-source-ai"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Grzegorz Adamczyk",
+            "email": "naturalgroove@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "filament/filament": "^4.0",
+        "filament/forms": "^4.0",
+        "spatie/laravel-package-tools": "^1.15.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NaturalGroove\\Filament\\RichEditorSourceAI\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NaturalGroove\\Filament\\RichEditorSourceAI\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NaturalGroove\\Filament\\RichEditorSourceAI\\FilamentRichEditorSourceAIServiceProvider"
+            ],
+            "aliases": {
+                "RichEditorSourceAI": "NaturalGroove\\Filament\\RichEditorSourceAI\\Facades\\RichEditorSource"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

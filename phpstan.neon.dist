@@ -1,0 +1,19 @@
+parameters:
+    level: 8
+    paths:
+        - src
+        - config
+
+    excludePaths:
+        - ./vendor/
+        - ./tests
+
+    parallel:
+        maximumNumberOfProcesses: 8
+
+    tmpDir: build/phpstan
+    checkModelProperties: true
+    noUnnecessaryCollectionCall: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given\.#'
