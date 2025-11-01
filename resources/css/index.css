@@ -1,2 +1,16 @@
 /* RichEditorSourceAI Styles */
-.fi-fo-rich-editor.source {}
+.fi-fo-rich-editor.source-ai {}
+
+.fi-fo-rich-editor.source-ai .fi-fo-rich-editor-tool:not([data-tiptap-menu-item-name^="source-ai"]) {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* 
+.fi-fo-rich-editor .fi-fo-rich-editor-tool[data-tiptap-menu-item-name=source-ai-transform] {
+    display: none;
+}
+
+.fi-fo-rich-editor.source-ai .fi-fo-rich-editor-tool[data-tiptap-menu-item-name=source-ai-transform] {
+    display: inline-block;
+} */

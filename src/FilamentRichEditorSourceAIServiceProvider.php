@@ -15,11 +15,11 @@ use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class RichEditorSourceAIServiceProvider extends PackageServiceProvider
+class FilamentRichEditorSourceAIServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'rich-editor-source-ai';
+    public static string $name = 'filament-rich-editor-source-ai';
 
-    public static string $viewNamespace = 'rich-editor-source-ai';
+    public static string $viewNamespace = 'filament-rich-editor-source-ai';
 
     public function configurePackage(Package $package): void
     {
@@ -46,6 +46,10 @@ class RichEditorSourceAIServiceProvider extends PackageServiceProvider
 
         if (file_exists($package->basePath('/../resources/lang'))) {
             $package->hasTranslations();
+        }
+
+        if (file_exists($package->basePath('/../resources/views'))) {
+            $package->hasViews(static::$viewNamespace);
         }
     }
 
