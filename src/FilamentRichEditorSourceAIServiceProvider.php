@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace NaturalGroove\Filament\RichEditorSourceAI;
 
 use Filament\Forms\Components\RichEditor;
