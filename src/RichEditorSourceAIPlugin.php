@@ -4,11 +4,11 @@ namespace NaturalGroove\Filament\RichEditorSourceAI;
 
 use Filament\Actions\Action;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\RichEditor\EditorCommand;
 use Filament\Forms\Components\RichEditor\Plugins\Contracts\RichContentPlugin;
 use Filament\Forms\Components\RichEditor\RichEditorTool;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\HtmlString;
@@ -33,7 +33,7 @@ class RichEditorSourceAIPlugin implements RichContentPlugin
     public function getTipTapJsExtensions(): array
     {
         return [
-            FilamentAsset::getScriptSrc('rich-content-plugins/source-ai'),
+            FilamentAsset::getScriptSrc('rich-content-plugins/source-ai', 'naturalgroove/laravel-filament-rich-editor-source-ai'),
         ];
     }
 
@@ -76,16 +76,22 @@ class RichEditorSourceAIPlugin implements RichContentPlugin
                 ->modalWidth(Width::SixExtraLarge)
                 ->modalHeading(__('filament-rich-editor-source-ai::editor.transform-html-modal.heading'))
                 ->extraAttributes(['class' => 'gallery-picker'])
-                ->fillForm(function (RichEditor $component): array {
-                    $html = html_entity_decode($component->getState() ?? '', ENT_QUOTES | ENT_HTML5);
+                ->mountUsing(function (RichEditor $component, Schema $form, $livewire) {
+                    $livewire->dispatch('exit-source-mode', statePath: $component->getStatePath());
 
-                    $prompts = config('filament-rich-editor-source-ai.prompts', []);
-                    $defaultPrompt = !empty($prompts) ? array_key_first($prompts) : null;
+                    $formState = function (RichEditor $component): array {
+                        $html = html_entity_decode($component->getState() ?? '', ENT_QUOTES | ENT_HTML5);
 
-                    return [
-                        'htmlContent' => $html,
-                        'prompt' => $defaultPrompt,
-                    ];
+                        $prompts = config('filament-rich-editor-source-ai.prompts', []);
+                        $defaultPrompt = !empty($prompts) ? array_key_first($prompts) : null;
+
+                        return [
+                            'htmlContent' => $html,
+                            'prompt' => $defaultPrompt,
+                        ];
+                    };
+
+                    $form->fill($formState($component));
                 })
                 ->schema([
                     Select::make('prompt')
@@ -107,6 +113,9 @@ class RichEditorSourceAIPlugin implements RichContentPlugin
                         ->required()
                         ->rows(10)
                         ->live()
+                        ->extraInputAttributes([
+                            'x-init' => 'state = window.formatHtml(state)',
+                        ])
                         ->hintActions([
                             Action::make('transformHtml')
                                 ->label(__('filament-rich-editor-source-ai::editor.transform-html-modal.transform-button'))

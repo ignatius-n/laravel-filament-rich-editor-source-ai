@@ -4,23 +4,24 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/naturalgroove/laravel-filament-rich-editor-source-ai.svg?style=flat-square)](https://packagist.org/packages/naturalgroove/laravel-filament-rich-editor-source-ai/downloads)
 [![License](https://img.shields.io/packagist/l/naturalgroove/laravel-filament-rich-editor-source-ai.svg?style=flat-square)](https://packagist.org/packages/naturalgroove/laravel-filament-rich-editor-source-ai)
 
-A powerful **Filament 4.x** plugin that enhances the Rich Editor component with HTML source editing capabilities and **AI-powered HTML transformation**. Edit raw HTML directly and leverage AI to clean, optimize, and transform your content automatically.
+A powerful **Filament 4.x** plugin that enhances the Rich Editor component with editing HTML source capabilities and **AI-powered HTML transformation**. 
+Edit raw HTML directly and leverage AI to clean, optimize, and transform your content automatically.
 
 ## ✨ Features
 
 - 🔍 **HTML Source Mode** - View and edit raw HTML content directly in the Rich Editor
 - 🤖 **AI-Powered HTML Transformation** - Clean, optimize, and transform HTML using AI (OpenAI, Anthropic, etc.)
-- ⌨️ **Keyboard Shortcuts** - Quick access with `Ctrl/Cmd + Shift + S`
+- ⌨️ **Keyboard Shortcuts** - Quick access with `Ctrl/Cmd + Shift + L`
 - 🎨 **Customizable Prompts** - Define your own AI transformation prompts
 - 🌍 **Multi-language Support** - Comes with English, Polish, and German translations
 - 🔌 **Plug & Play** - Automatically integrates with all Rich Editor instances
-- 🎯 **Tailwind CSS Ready** - Includes preset for Tailwind Typography optimization
+- 🎯 **Tailwind CSS Ready** - Includes prompt preset for Tailwind Typography optimization
 - ♿ **WCAG Compliance** - AI can transform content to meet accessibility standards
 
 ## 📋 Requirements
 
 - PHP 8.2 or higher
-- Laravel 10.x or 11.x
+- Laravel 10.x, 11.x or 12.x
 - Filament 4.x
 - [Prism PHP](https://github.com/prism-php/prism) for AI integration
 
@@ -252,11 +253,13 @@ Publish the translations and add your language:
 php artisan vendor:publish --tag="filament-rich-editor-source-ai-translations"
 ```
 
-Then create a new language file in `resources/lang/{locale}/editor.php`.
+Then create a new language file in `resources/lang/vendor/filament-rich-editor-source-ai/{locale}/editor.php`.
 
 ## 🎨 Customization
 
-Assets will be published to `public/js/filament/rich-editor-source-ai/`.
+Javascript assets will be published to `public/js/naturalgroove/laravel-filament-rich-editor-source-ai/`.
+
+Css assets will be published to `public/css/naturalgroove/laravel-filament-rich-editor-source-ai/`.
 
 ## 💡 Use Cases
 

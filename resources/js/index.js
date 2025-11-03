@@ -1,7 +1,33 @@
 import { Extension } from '@tiptap/core'
+import { html as beautifyHtml } from 'js-beautify'
 
 // WeakMap to store editor-specific state
-const editorStates = new WeakMap();
+const editorStates = new WeakMap()
+
+// Format HTML using js-beautify
+window.formatHtml = function (html) {
+    try {
+        const formatted = beautifyHtml(html, {
+            indent_size: 2,
+            indent_char: ' ',
+            max_preserve_newlines: 1,
+            preserve_newlines: true,
+            wrap_line_length: 0,
+            wrap_attributes: 'auto',
+            unformatted: ['code', 'pre', 'em', 'strong', 'span'],
+            content_unformatted: ['pre', 'textarea'],
+            indent_inner_html: true,
+            indent_body_inner_html: true,
+            indent_head_inner_html: true,
+            end_with_newline: false,
+            extra_liners: [],
+        })
+        return formatted
+    } catch (error) {
+        console.warn('Failed to format HTML:', error)
+        return html
+    }
+}
 
 export default Extension.create({
     name: 'source-ai',
@@ -72,27 +98,35 @@ export default Extension.create({
 
     addCommands() {
         return {
-            toggleSource: () => ({ editor }) => {
+            toggleSource: (forceState = null) => ({ editor }) => {
                 const editorWrapper = editor.options.element.closest('.fi-fo-rich-editor');
                 if (!editorWrapper) return false;
 
                 const state = editorStates.get(editor);
                 if (!state) return false;
 
+                if (state.isSourceMode === forceState) {
+                    // Already in desired state
+                    return true;
+                }
+
                 // Toggle the state
-                state.isSourceMode = !state.isSourceMode;
+                state.isSourceMode = forceState !== null ? forceState : !state.isSourceMode;
 
                 if (state.isSourceMode) {
                     // Switching TO source mode
                     // Use the original getHTML to get actual content from editor
                     const htmlContent = state.originalGetHTML();
-                    state.sourceContent = htmlContent;
+
+                    // Format the HTML with js-beautify
+                    const formattedHtml = formatHtml(htmlContent);
+                    state.sourceContent = formattedHtml;
 
                     // Create a textarea element to display the HTML
                     const textarea = document.createElement('textarea');
-                    textarea.value = htmlContent;
+                    textarea.value = formattedHtml;
                     textarea.className = 'source-view-textarea';
-                    textarea.style.cssText = 'width: 100%; height: 100%; min-height: 300px; font-family: monospace; font-size: 14px; padding: 10px; border: none; outline: none; resize: vertical; background: transparent; color: inherit;';
+                    textarea.style.cssText = 'width: 100%; height: 100%; min-height: 310px; font-family: monospace; font-size: 13px; padding: 10px; border: none; outline: none; resize: vertical; background: transparent; color: inherit;';
 
                     // Listen for changes in the textarea
                     textarea.addEventListener('input', (e) => {

@@ -58,13 +58,16 @@ class FilamentRichEditorSourceAIServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         // Asset Registration
-        FilamentAsset::register([
-            // Main plugin assets
-            Css::make('rich-editor-source-ai-styles', __DIR__ . '/../resources/dist/rich-editor-source-ai.css'),
+        FilamentAsset::register(
+            [
+                // Main plugin assets
+                Css::make('rich-editor-source-ai-styles', __DIR__ . '/../resources/dist/rich-editor-source-ai.css'),
 
-            // TipTap extension for source-ai functionality - register without package name
-            Js::make('rich-content-plugins/source-ai', __DIR__ . '/../resources/dist/rich-content-plugins/source-ai.js')->loadedOnRequest(),
-        ]);
+                // TipTap extension for source-ai functionality - register without package name
+                Js::make('rich-content-plugins/source-ai', __DIR__ . '/../resources/dist/rich-content-plugins/source-ai.js')->loadedOnRequest(),
+            ],
+            $this->getAssetPackageName()
+        );
 
         // Publish assets
         $this->publishes([
@@ -99,7 +102,7 @@ class FilamentRichEditorSourceAIServiceProvider extends PackageServiceProvider
         Testable::mixin(new TestsRichEditorSourceAI());
     }
 
-    protected function getAssetPackageName(): ?string
+    protected function getAssetPackageName(): string
     {
         return 'naturalgroove/laravel-filament-rich-editor-source-ai';
     }
