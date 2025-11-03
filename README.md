@@ -90,7 +90,7 @@ RichEditor::make('content')
 3. Preview and edit the HTML content
 4. Click **Transform HTML** to apply AI optimization
 5. Review the transformed content and insert it back into the editor
-6. 
+
 ![HTML content transformation using AI](img/ai-transform-modal.webp)
 
 ### Default Configuration
