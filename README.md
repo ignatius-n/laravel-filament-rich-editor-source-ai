@@ -1,8 +1,10 @@
-# Laravel Filament Rich Editor Source AI
+# Laravel Filament Rich Editor HTML Source with AI transformation
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/naturalgroove/laravel-filament-rich-editor-source-ai.svg?style=flat-square)](https://packagist.org/packages/naturalgroove/laravel-filament-rich-editor-source-ai)
 [![Total Downloads](https://img.shields.io/packagist/dt/naturalgroove/laravel-filament-rich-editor-source-ai.svg?style=flat-square)](https://packagist.org/packages/naturalgroove/laravel-filament-rich-editor-source-ai/downloads)
 [![License](https://img.shields.io/packagist/l/naturalgroove/laravel-filament-rich-editor-source-ai.svg?style=flat-square)](https://packagist.org/packages/naturalgroove/laravel-filament-rich-editor-source-ai)
+
+<img class="filament-hidden" alt="Rich Editor HTML Source with AI" src="img/cover.jpg">
 
 A powerful **Filament 4.x** plugin that enhances the Rich Editor component with editing HTML source capabilities and **AI-powered HTML transformation**. 
 Edit raw HTML directly and leverage AI to clean, optimize, and transform your content automatically.
@@ -88,6 +90,8 @@ RichEditor::make('content')
 3. Preview and edit the HTML content
 4. Click **Transform HTML** to apply AI optimization
 5. Review the transformed content and insert it back into the editor
+6. 
+![HTML content transformation using AI](img/ai-transform-modal.webp)
 
 ### Default Configuration
 
