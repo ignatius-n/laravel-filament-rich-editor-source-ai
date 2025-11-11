@@ -8,6 +8,11 @@ return [
         'model' => 'gpt-5-mini',
     ],
 
+    'config' => [
+        'max_tokens' => 32000,
+        'timeout' => 30,
+    ],
+
     'system-prompt' => 'You are an expert HTML content transformer. You will be provided with HTML content and a specific prompt.
         Your task is to transform the HTML content according to the given prompt, ensuring that the output is clean, well-structured, and adheres to best practices for web content. Focus on improving readability, accessibility, and overall user experience while maintaining the original intent of the content.
         Do not wrap in tag like <main> - content are coming from WYSIWYG editor so they are already in the right context.

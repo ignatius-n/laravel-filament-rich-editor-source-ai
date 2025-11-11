@@ -104,6 +104,11 @@ return [
         'provider' => Provider::OpenAI,
         'model' => 'gpt-4o-mini',
     ],
+
+    'config' => [
+        'max_tokens' => 32000,
+        'timeout' => 15,
+    ],
     
     'prompts' => [
         'tailwind-css-typography-optimization' => [

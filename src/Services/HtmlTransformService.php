@@ -15,6 +15,8 @@ class HtmlTransformService
             ->using($provider, $model)
             ->withSystemPrompt(config('filament-rich-editor-source-ai.system-prompt'))
             ->withPrompt("Transform the following HTML content according to this prompt: {$prompt}\n\nHTML Content:\n{$htmlContent}")
+            ->withMaxTokens(config('filament-rich-editor-source-ai.config.max_tokens'))
+            ->withClientOptions(['timeout' => config('filament-rich-editor-source-ai.config.timeout')])
             ->asText();
 
         return $response->text;
